@@ -10,16 +10,9 @@
 "===================================================================================
 " GENERAL SETTINGS
 "===================================================================================
-
+"
 set cmdheight=2                       " Make command line two lines high
 set mousehide                         " Hide the mouse when typing text
-
-highlight Normal   guibg=grey90
-highlight Cursor   guibg=Blue   guifg=NONE
-highlight lCursor  guibg=Cyan   guifg=NONE
-highlight NonText  guibg=grey80
-highlight Constant gui=NONE     guibg=grey95
-highlight Special  gui=NONE     guibg=grey95
 
 "
 "-------------------------------------------------------------------------------
@@ -51,52 +44,64 @@ inoremap  <RightMouse> <ESC>
 " use font with clearly distinguishable brackets : ()[]{}
 "-------------------------------------------------------------------------------
 "set guifont=Luxi\ Mono\ 14
-if argc() == 0
-  autocmd VimLeavePre * silent mksession! ./lastSession.vim
-endif
+"if argc() == 0
+"  autocmd VimLeavePre * silent mksession! ./lastSession.vim
+"endif
 
 "autocmd VimLeavePre * silent mksession! ./lastSession.vim
 "autocmd VimEnter * silent source ./lastSession.vim
 
-if getfsize("./lastSession.vim") >= 0
-        source ./lastSession.vim
-endif
+"if getfsize("./lastSession.vim") >= 0
+"        source ./lastSession.vim
+"endif
 
 "set nocompatible
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
 
 set guifont=Lucida\ Console:h10:cRUSSIAN
+
 " настраиваю для работы с русскими словами (чтобы w, b, * понимали
 " русские слова)
 set iskeyword=@,48-57,_,192-255
 syntax enable
 set background=dark
 colorscheme solarized
-let python_highlight_all = 1
-"Перед сохранением вырезаем пробелы на концах (только в .py файлах)
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
-"В .py файлах включаем умные отступы после ключевых слов
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufRead *.py set expandtab
-autocmd BufRead *.py set smarttab
 
+set nocp
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_NamespaceSearch = 2
 nnoremap <c-tab>  :tabnext<CR>
 nnoremap <c-s-tab>  :tabprev<CR>
 
 
 nnoremap * *N
-nnoremap <C-F8> :nohlsearch<CR>
-
+nnoremap <F8> :nohlsearch<CR>
+imap <F12> <Esc>:lcd %:p:h <bar> exe'!python '.expand('%') <bar> lcd -<CR>
+map <F12> <Esc>:lcd %:p:h <bar> exe'!python '.expand('%') <bar> lcd -<CR>
+nmap <silent> <F3> <Plug>ToggleProject
+let proj_flags='imstT'
 imap <F4> <Esc>:tabnew<CR>:FufFile<CR>
 map <F4> <Esc>:tabnew<CR>:FufFile<CR>
 
 imap <F2> <Esc>:FufBuffer<CR>
 map <F2> <Esc>:FufBuffer<CR>
 
+imap <F6> <Esc>:mksession! $HOME/.vim/lastsession.vim<CR>
+map <F6> <Esc>:mksession! $HOME/.vim/lastsession.vim<CR>
+map <F9> <Esc>:source $HOME/.vim/lastsession.vim<CR>
 
 imap <C-S> <Esc>:w<CR> 
 map <C-S> <Esc>:w<CR> 
+
+map <F10> <Esc>:qa<CR>
+set nu!
+
+map <F7> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+set wildmode=longest,list
+
+"imap <C-S> <Esc>:w<CR> 
+"map <C-S> <Esc>:w<CR> 
 
 set nu!
 
@@ -109,7 +114,6 @@ set lines=999
 set tabstop=4
 " Размер сдвига при нажатии на клавиши << и >>
 set shiftwidth=4
-
 " Копирует отступ от предыдущей строки
 set autoindent
 " Включаем 'умную' автоматическую расстановку отступов
@@ -127,10 +131,8 @@ set linebreak
 " К примеру, если вы наберете 2d, то в правом нижнем углу экрана Vim отобразит строку 2d.
 set showcmd
 " Включаем отображение дополнительной информации в статусной строке
-"set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
-set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
+set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
 set ls=2
-
 
 
 " Включаем подсветку выражения, которое ищется в тексте
@@ -159,10 +161,10 @@ set visualbell
 :map ]] j0[[%/{<CR>
 :map [] k$][%?}<CR>
 
-":inoremap ( ()<Esc>i
-":inoremap { {}<Esc>i
-":inoremap [ []<Esc>i
-":inoremap < <><Esc>i
+:inoremap ( ()<Esc>i
+:inoremap { {}<Esc>i
+:inoremap [ []<Esc>i
+:inoremap < <><Esc>i
 set path=.,,**
 
 let Tlist_GainFocus_On_ToggleOpen = 1
@@ -172,7 +174,7 @@ map <F5> <Esc>:TlistToggle<CR>
 " Уровень сокрытия по умолчанию для вновь открытых файлов
 setlocal foldlevelstart=0
 " Метод фолдинга - по синтаксису
-"setlocal foldmethod=syntax
+setlocal foldmethod=syntax
 
 
 
@@ -213,14 +215,15 @@ setlocal foldlevelstart=0
 " Меню Encoding <--
 
 
-set cursorline
-
 " Кодировка терминала, должна совпадать с той, которая используется для вывода в терминал
-"set termencoding=utf-8
+set termencoding=utf-8
 set encoding=utf-8
 " возможные кодировки файлов и последовательность определения.
-"set fileencodings=utf8,cp1251,ucs-2le
-scriptencoding cp1251 
+"set fileencodings=utf8,cp1251
+set cursorline
+scriptencoding cp1251
+
+set langmenu=ru_ru 
 set helplang=ru,en 
 lang mes ru_RU.utf-8
 
