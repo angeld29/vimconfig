@@ -22,17 +22,17 @@ set mousehide                         " Hide the mouse when typing text
 " shift left   : change window focus to one on left
 " shift right  : change window focus to one on right
 "-------------------------------------------------------------------------------
-nnoremap <s-down>   <c-w>w
-nnoremap <s-up>     <c-w>W
-nnoremap <s-left>   <c-w>h
-nnoremap <s-right>  <c-w>l
+"nnoremap <s-down>   <c-w>w
+"nnoremap <s-up>     <c-w>W
+"nnoremap <s-left>   <c-w>h
+"nnoremap <s-right>  <c-w>l
 "
 "-------------------------------------------------------------------------------
 "  Some additional hot keys:
 "    S-F3  -  call gvim file browser
 "-------------------------------------------------------------------------------
- noremap  <silent> <s-F3>       :silent browse confirm e<CR>
-inoremap  <silent> <s-F3>  <Esc>:silent browse confirm e<CR>
+" noremap  <silent> <s-F3>       :silent browse confirm e<CR>
+"inoremap  <silent> <s-F3>  <Esc>:silent browse confirm e<CR>
 "
 "-------------------------------------------------------------------------------
 " toggle insert mode <--> 'normal mode with the <RightMouse>-key
@@ -67,20 +67,48 @@ set iskeyword=@,48-57,_,192-255
 syntax enable
 set background=dark
 colorscheme solarized
+let g:solarized_termcolors=256
+
+"python
+imap <F12> <Esc>:lcd %:p:h <bar> exe'!python '.expand('%') <bar> lcd -<CR>
+map <F12> <Esc>:lcd %:p:h <bar> exe'!python '.expand('%') <bar> lcd -<CR>
+let perl_fold=1
+let perl_fold_blocks = 1
+let javaScript_fold=1
+
+map gr :diffget 3<CR>
+map gl :diffget 1<CR>
+map g1 :diffget 2<CR>
+map g2 :diffget 3<CR>
+map g3 :diffget 4<CR>
+set diffopt+=iwhite
+filetype on
+filetype plugin on
+filetype indent on
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+
 
 set nocp
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_NamespaceSearch = 2
-nnoremap <c-tab>  :tabnext<CR>
-nnoremap <c-s-tab>  :tabprev<CR>
+
+if has("win32")
+	nnoremap <c-tab>  :tabnext<CR>
+	nnoremap <c-s-tab>  :tabprev<CR>
+else
+	map <s-tab>  :tabprev<CR>
+	nmap <s-tab>  :tabprev<CR>
+	nmap <tab>  <Esc>:tabnext<CR>
+endif
 
 
-nnoremap * *N
+"nnoremap * *N
 nnoremap <F8> :nohlsearch<CR>
-imap <F12> <Esc>:lcd %:p:h <bar> exe'!python '.expand('%') <bar> lcd -<CR>
-map <F12> <Esc>:lcd %:p:h <bar> exe'!python '.expand('%') <bar> lcd -<CR>
 nmap <silent> <F3> <Plug>ToggleProject
 let proj_flags='imstT'
+
+
 imap <F4> <Esc>:tabnew<CR>:FufFile<CR>
 map <F4> <Esc>:tabnew<CR>:FufFile<CR>
 
@@ -99,9 +127,6 @@ set nu!
 
 map <F7> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 set wildmode=longest,list
-
-"imap <C-S> <Esc>:w<CR> 
-"map <C-S> <Esc>:w<CR> 
 
 set nu!
 
@@ -131,7 +156,8 @@ set linebreak
 " К примеру, если вы наберете 2d, то в правом нижнем углу экрана Vim отобразит строку 2d.
 set showcmd
 " Включаем отображение дополнительной информации в статусной строке
-set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
+"set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
+set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
 set ls=2
 
 
@@ -175,12 +201,6 @@ map <F5> <Esc>:TlistToggle<CR>
 setlocal foldlevelstart=0
 " Метод фолдинга - по синтаксису
 setlocal foldmethod=syntax
-
-
-
-
-
-
 
 
 " Меню Encoding -->
