@@ -187,10 +187,10 @@ set visualbell
 :map ]] j0[[%/{<CR>
 :map [] k$][%?}<CR>
 
-:inoremap ( ()<Esc>i
-:inoremap { {}<Esc>i
-:inoremap [ []<Esc>i
-:inoremap < <><Esc>i
+":inoremap ( ()<Esc>i
+":inoremap { {}<Esc>i
+":inoremap [ []<Esc>i
+":inoremap < <><Esc>i
 set path=.,,**
 
 let Tlist_GainFocus_On_ToggleOpen = 1
