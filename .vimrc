@@ -9,7 +9,25 @@
 "===================================================================================
 " GENERAL SETTINGS
 "===================================================================================
+"git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
 set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+filetype plugin indent on
+
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'matchit.zip'
+Bundle 'lua-support'
+
+Bundle 'syntastic'
+Bundle 'AutoComplPop'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+
+Bundle 'perl-support.vim'
+Bundle 'zencoding.vim'
+
 "source $VIMRUNTIME/vimrc_example.vim
 "behave mswin
 set cmdheight=2                       " Make command line two lines high
@@ -200,7 +218,7 @@ map g1 :diffget 2<CR>
 map g2 :diffget 3<CR>
 map g3 :diffget 4<CR>
 set diffopt+=iwhite
-filetype plugin indent on
+
 
 "##############################################
 set termencoding=utf-8
