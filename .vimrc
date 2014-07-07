@@ -16,17 +16,20 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 filetype plugin indent on
 
+Bundle 'vundle'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'kien/ctrlp.vim'
 Bundle 'matchit.zip'
 Bundle 'lua-support'
 
 Bundle 'syntastic'
 Bundle 'AutoComplPop'
 Bundle 'L9'
-Bundle 'FuzzyFinder'
+"Bundle 'FuzzyFinder'
 
 Bundle 'perl-support.vim'
 Bundle 'zencoding.vim'
+"Bundle 'taglist.vim'
 
 "source $VIMRUNTIME/vimrc_example.vim
 "behave mswin
@@ -94,12 +97,14 @@ nmap <tab>  <Esc>:tabnext<CR>
 "nnoremap * *N
 nnoremap <F8> :nohlsearch<CR>
 
-imap <F4> <Esc>:tabnew<CR>:FufFile<CR>
+imap <F4> <Esc>:tabnew<CR>:CtrlP<CR>
+":FufFile<CR>
 
-map <F4> <Esc>:tabnew<CR>:FufFile<CR>
+map <F4> <Esc>:tabnew<CR>:CtrlP<CR>
+":FufFile<CR>
 
-imap <F2> <Esc>:FufBuffer<CR>
-map <F2> <Esc>:FufBuffer<CR>
+imap <F2> <Esc>:CtrlPBuffer<CR>
+map <F2> <Esc>:CtrlPBuffer<CR>
 
 imap <F6> <Esc>:mksession! $HOME/.vim/lastSession.vim<CR>
 map <F6> <Esc>:mksession! $HOME/.vim/lastSession.vim<CR>
