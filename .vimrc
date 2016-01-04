@@ -16,7 +16,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 filetype plugin indent on
 
-Bundle 'vundle'
+"Bundle 'vundle'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'kien/ctrlp.vim'
 Bundle 'matchit.zip'
@@ -29,7 +29,11 @@ Bundle 'L9'
 
 Bundle 'perl-support.vim'
 Bundle 'zencoding.vim'
+Bundle 'xml.vim'
+Bundle 'closetag.vim'
 "Bundle 'taglist.vim'
+Bundle 'jelera/vim-javascript-syntax'
+"Bundle 'vim-perl/vim-perl'
 
 "source $VIMRUNTIME/vimrc_example.vim
 "behave mswin
@@ -168,8 +172,9 @@ map <F5> <Esc>:TlistToggle<CR>
 
 setlocal foldlevelstart=0
 setlocal foldmethod=syntax
+set foldnestmax=3
 let perl_fold=1
-let perl_fold_blocks = 1
+let perl_fold_blocks = 0
 
 
 " ???? Encoding -->
@@ -226,7 +231,7 @@ set diffopt+=iwhite
 
 
 "##############################################
-set termencoding=utf-8
+set termencoding=utf8
 "set term=xterm-256color
 "set t_Co=256 
 "let &t_AB="\e[48;5;%dm" 
@@ -240,7 +245,7 @@ colorscheme solarized
 
 set langmenu=ru_ru 
 set helplang=ru,en 
-lang mes ru_RU.utf-8
+lang mes ru_RU.utf8
 
 
 let g:netrw_cygwin=0 
@@ -252,3 +257,21 @@ let $ROOT="scp://angeld@kitezhgrad5.combats.ru/sites/combats.ru/"
 let $TROOT=$ROOT."web/mobtmpl/" 
  
 cabbrev ew tabnew $TROOT 
+
+if version >= 700
+    set history=64
+"    set undolevels=128
+	"    set undodir=~/.vim/undodir/
+"    set undofile
+"    set undolevels=1000
+"    set undoreload=10000
+endif
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
+"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags noci
+let g:xml_syntax_folding = 1
+au FileType xml setlocal foldmethod=syntax
+au FileType lua setlocal foldmethod=syntax
+au FileType javascript call JavaScriptFold()
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
