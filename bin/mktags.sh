@@ -1,0 +1,2 @@
+#!/bin/bash
+perl ~/bin/pltags.pl lib/*.p? lib/admin_data/*.p? lib/Bank/*.p? lib/Casino/*.p?  lib/Casino/Kaboom/*.p? lib/Casino/Preferance/*.p? lib/Cleanup/*.p? lib/config/*.p? lib/config/Bank/*.p? lib/FCGI/*.p? lib/LoginIDDB/Legacy/*.p? lib/Messages/*.p? lib/Real/*.p? lib/SC/*.p? lib/Statistics/*.p? libold/*.p? libold/config/*.p? libold/config/dungeons/*.p? scripts/*.p? web/*.p? web/admins/*.p? web/admins/clanedit/*.p? web/admins/encicl/*.p? web/admins/logedit/*.p? web/casino/*.p? web/newklans/*.p? web/newklans/waits/html/*.p? web/palladin/*.p? web/statistics/*.p? 

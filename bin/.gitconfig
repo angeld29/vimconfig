@@ -1,0 +1,41 @@
+#[color "branch"]
+#current = yellow reverse
+#local = yellow
+#remote = green
+[core]
+#pager=iconv -f cp1251 -t utf-8 |less
+[user]
+name = angeld
+email = angeld@combats.com
+[diff]
+external = git_diff_wrapper
+
+[pager]
+diff =
+[alias]
+co = checkout
+ci = commit
+st = status
+br = branch
+hist = log --pretty=format:\"%C(green)%h %ad | %s%Creset%d [%an]%Cgreen(%cr)%Creset\" --graph --date=local
+histl = log --pretty=format:\"%C(green)%h %ad | %s%Creset%d [%an]%Cgreen(%cr)%Creset\" --date=local
+type = cat-file -t
+dump = cat-file -p
+fdiff = diff --name-status
+
+[color]
+	branch = auto
+	status = auto
+	ui = auto
+[log]
+	decorate = full
+#[gui]
+#encoding=cp1251
+#[i18n]
+#commitencoding = cp1251
+#logoutputencoding = cp1251 #UTF-8
+
+[mergetool "vimdiff3"]
+	cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[merge]
+	tool = vimdiff3
