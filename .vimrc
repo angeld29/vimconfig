@@ -30,10 +30,15 @@ Bundle 'L9'
 Bundle 'perl-support.vim'
 Bundle 'zencoding.vim'
 Bundle 'xml.vim'
+"Bundle 'sql.vim'
+"Bundle 'sqlplus.vim'
 Bundle 'closetag.vim'
 "Bundle 'taglist.vim'
 Bundle 'jelera/vim-javascript-syntax'
 "Bundle 'vim-perl/vim-perl'
+Bundle 'NLKNguyen/pipe.vim'
+Bundle 'NLKNguyen/pipe-mysql.vim'
+
 
 "source $VIMRUNTIME/vimrc_example.vim
 "behave mswin
@@ -232,8 +237,8 @@ set diffopt+=iwhite
 
 "##############################################
 set termencoding=utf8
-"set term=xterm-256color
-"set t_Co=256 
+set term=xterm-256color
+set t_Co=256 
 "let &t_AB="\e[48;5;%dm" 
 "let &t_AF="\e[38;5;%dm" 
  
@@ -269,9 +274,10 @@ endif
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
 "autocmd FileType html set omnifunc=htmlcomplete#CompleteTags noci
 let g:xml_syntax_folding = 1
+set tags=./tags,tags,~/tags
 au FileType xml setlocal foldmethod=syntax
 au FileType lua setlocal foldmethod=syntax
 au FileType javascript call JavaScriptFold()
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-
+source ~/.vimrc_mail
