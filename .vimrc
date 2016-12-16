@@ -38,6 +38,8 @@ Bundle 'jelera/vim-javascript-syntax'
 "Bundle 'vim-perl/vim-perl'
 Bundle 'NLKNguyen/pipe.vim'
 Bundle 'NLKNguyen/pipe-mysql.vim'
+Bundle 'c9s/perlomni.vim'
+"Bundle 'osfameron/perl-tags-vim'
 
 
 "source $VIMRUNTIME/vimrc_example.vim
@@ -106,10 +108,12 @@ nmap <tab>  <Esc>:tabnext<CR>
 "nnoremap * *N
 nnoremap <F8> :nohlsearch<CR>
 
-imap <F4> <Esc>:tabnew<CR>:CtrlP<CR>
+imap <F4> <Esc>:tabnew<CR>:e lib/Afisha<CR>
+":CtrlP<CR>
 ":FufFile<CR>
 
-map <F4> <Esc>:tabnew<CR>:CtrlP<CR>
+map <F4> <Esc>:tabnew<CR>:e lib/Afisha<CR>
+":CtrlP<CR>
 ":FufFile<CR>
 
 imap <F2> <Esc>:CtrlPBuffer<CR>
@@ -224,7 +228,6 @@ set cursorline
 
 "imap :!setxkbmap us:!setxkbmap us,ru
 "nmap :!setxkbmap us:!setxkbmap us,ru
-"setlocal spell spelllang=ru_yo,en_us
 
 
 map gr :diffget 3<CR>
@@ -281,3 +284,38 @@ au FileType javascript call JavaScriptFold()
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 source ~/.vimrc_mail
+func! CheckPerlSyntax()
+	let mpr = &makeprg
+	let ef = &errorformat
+	let exeFile = expand("%:t")
+	let l:currentbuffer   = bufname("%")
+	let l:fullname        = expand("%:p")
+	exe ':setlocal makeprg=perl\ -c'
+	exe ':set errorformat=
+				\%-G%.%#had\ compilation\ errors.,
+				\%-G%.%#syntax\ OK,
+				\%m\ at\ %f\ line\ %l.,
+				\%+A%.%#\ at\ %f\ line\ %l\\,%.%#,
+				\%+C%.%#'
+	silent exe  ':make  '. shellescape (l:fullname) 
+	exe ":botright cwindow"
+	let &makeprg     = mpr
+	let &errorformat = ef
+	redraw!
+	if l:currentbuffer ==  bufname("%")
+		echohl Search
+		echomsg l:currentbuffer." : Syntax is OK"
+		echohl None
+		return 0
+	else
+		setlocal wrap
+		setlocal linebreak
+	endif
+
+endfunc
+
+"nmap pl :!perl %<.pl<CR>
+"map <S-F9> :call CheckPerlSyntax()<CR>
+nmap cpl :call CheckPerlSyntax()<CR>
+
+
