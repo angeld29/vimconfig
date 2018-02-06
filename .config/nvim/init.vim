@@ -23,6 +23,7 @@ Plug 'vim-scripts/perl-support.vim'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
+"Plug 'Valloric/YouCompleteMe'
 "Plug 'vimlab/neojs'
 
 "Bundle 'kien/ctrlp.vim'
@@ -85,10 +86,13 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
+let g:syntastic_quiet_messages = { 'regex': 'malformed number' }
+let g:syntastic_perl_checkers=['perl']
+
 
 set wrap
 set linebreak
