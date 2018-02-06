@@ -39,6 +39,8 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'NLKNguyen/pipe.vim'
 Bundle 'NLKNguyen/pipe-mysql.vim'
 Bundle 'c9s/perlomni.vim'
+Bundle 'fatih/vim-go'
+Bundle 'vitorleal/vim-go-syntax'
 "Bundle 'osfameron/perl-tags-vim'
 
 
@@ -108,11 +110,11 @@ nmap <tab>  <Esc>:tabnext<CR>
 "nnoremap * *N
 nnoremap <F8> :nohlsearch<CR>
 
-imap <F4> <Esc>:tabnew<CR>:e lib/Afisha<CR>
+imap <F4> <Esc>:tabnew<CR>
 ":CtrlP<CR>
 ":FufFile<CR>
 
-map <F4> <Esc>:tabnew<CR>:e lib/Afisha<CR>
+map <F4> <Esc>:tabnew<CR>
 ":CtrlP<CR>
 ":FufFile<CR>
 
@@ -139,6 +141,7 @@ set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
+set expandtab ts=4 sw=4 ss=4 ai
 syntax on
 "syntax enable
 
@@ -317,5 +320,12 @@ endfunc
 "nmap pl :!perl %<.pl<CR>
 "map <S-F9> :call CheckPerlSyntax()<CR>
 nmap cpl :call CheckPerlSyntax()<CR>
+let g:ctrlp_max_depth=15
+let g:go_version_warning = 0
 
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
