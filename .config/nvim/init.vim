@@ -23,19 +23,15 @@ Plug 'vim-scripts/perl-support.vim'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
+Plug 'WolfgangMehner/lua-support'
+"Plug 'w0rp/ale'
+"Plug 'Shougo/deoplete.nvim'
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'vimlab/neojs'
 
-"Bundle 'kien/ctrlp.vim'
-"Bundle 'matchit.zip'
-"Bundle 'lua-support'
-
-"Bundle 'syntastic'
-"Bundle 'AutoComplPop'
 "Bundle 'L9'
 ""Bundle 'FuzzyFinder'
 
-"Bundle 'perl-support.vim'
 "Bundle 'zencoding.vim'
 "Bundle 'xml.vim'
 "Bundle 'closetag.vim'
@@ -43,7 +39,12 @@ Plug 'c9s/perlomni.vim'
 call plug#end()
 
 set cmdheight=2                       " Make command line two lines high
-set mousehide                         " Hide the mouse when typing text
+"set mousehide                         " Hide the mouse when typing text
+set mouse=a
+
+"set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
+set iminsert=0                  " раскладка по умолчанию для ввода - английская
+set imsearch=0                  " раскладка по умолчанию для поиска - английская
 
 set guifont=Lucida\ Console:h10:cRUSSIAN
 set iskeyword=@,48-57,_,192-255
@@ -67,7 +68,7 @@ map <F2> <Esc>:CtrlPBuffer<CR>
 imap <C-S> <Esc>:w<CR> 
 map <C-S> <Esc>:w<CR> 
 
-map <F10> <Esc>:qa<CR>
+map <F10> <Esc>:q<CR>
 set nu!
 
 
@@ -87,7 +88,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_quiet_messages = { 'regex': 'malformed number' }
@@ -125,7 +126,8 @@ set cursorline
 "let g:solarized_use16 = 1
 let g:solarized_termcolors=256
 set background=dark
-colorscheme solarized8
+colorscheme solarized
+"colorscheme NeoSolarized
 "set termguicolors
 
 set termencoding=utf8
@@ -148,6 +150,7 @@ au FileType lua setlocal foldmethod=syntax
 "autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 "nmap cpl :call CheckPerlSyntax()<CR>
+let g:ctrlp_extensions = ['tag']
 let g:ctrlp_max_depth=15
 let g:ctrlp_max_files=30000 
 
