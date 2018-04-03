@@ -19,11 +19,13 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized'
 Plug 'kien/ctrlp.vim'
 Plug 'tmhedberg/matchit'
-Plug 'vim-scripts/perl-support.vim'
 Plug 'vim-scripts/AutoComplPop'
+Plug 'vim-scripts/VisIncr'
 Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
 Plug 'WolfgangMehner/lua-support'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/perl-support.vim'
 "Plug 'w0rp/ale'
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'Valloric/YouCompleteMe'
@@ -39,8 +41,8 @@ Plug 'WolfgangMehner/lua-support'
 call plug#end()
 
 set cmdheight=2                       " Make command line two lines high
-"set mousehide                         " Hide the mouse when typing text
-set mouse=a
+set mousehide                         " Hide the mouse when typing text
+"set mouse=a
 
 "set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
 set iminsert=0                  " раскладка по умолчанию для ввода - английская
@@ -82,9 +84,9 @@ syntax on
 set showcmd
 set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
 set ls=2
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
@@ -114,9 +116,12 @@ set path=.,,**
 
 setlocal foldlevelstart=1
 setlocal foldmethod=syntax
-set foldnestmax=3
+set foldnestmax=2
 let perl_fold=1
 let perl_fold_blocks = 1
+let sh_fold_enabled = 1
+let perl_extended_vars=1
+let perl_sync_dist=250
 
 set fileencodings=utf8,cp1251
 set ffs=unix,dos
@@ -145,6 +150,7 @@ let g:xml_syntax_folding = 1
 
 au FileType xml setlocal foldmethod=syntax
 au FileType lua setlocal foldmethod=syntax
+au FileType perl setlocal foldmethod=syntax
 "au FileType javascript call JavaScriptFold()
 "autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 "autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
@@ -157,3 +163,16 @@ let g:ctrlp_max_files=30000
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$\|node_modules$\|frontend$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$|\.jpg$' }
+
+"let g:ale_fixers = {
+            "\   'perl': ['perl'],
+            "\}
+
+" Set this setting in vimrc if you want to fix files automatically on save.
+" " This is off by default.
+let g:ale_fix_on_save = 1
+"let g:ale_completion_enabled = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
