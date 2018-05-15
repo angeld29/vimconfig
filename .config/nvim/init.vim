@@ -26,6 +26,7 @@ Plug 'c9s/perlomni.vim'
 Plug 'WolfgangMehner/lua-support'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/perl-support.vim'
+Plug 'christoomey/vim-tmux-navigator'
 "Plug 'w0rp/ale'
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'Valloric/YouCompleteMe'
@@ -176,3 +177,9 @@ let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
