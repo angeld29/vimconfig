@@ -17,7 +17,7 @@ call plug#begin('~/.config/nvim/plugins')
 Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized'
-Plug 'kien/ctrlp.vim'
+"Plug 'kien/ctrlp.vim'
 Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'vim-scripts/VisIncr'
@@ -30,6 +30,8 @@ Plug 'vim-scripts/L9'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/taglist.vim'
+Plug '~/utils/fzf'
+Plug 'junegunn/fzf.vim'
 "Plug 'w0rp/ale'
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'Valloric/YouCompleteMe'
@@ -68,8 +70,14 @@ imap <F4> <Esc>:tabnew<CR>
 
 map <F4> <Esc>:tabnew<CR>
 
-imap <F2> <Esc>:CtrlPBuffer<CR>
-map <F2> <Esc>:CtrlPBuffer<CR>
+imap <F2> <Esc>:Buffers<CR>
+map <F2> <Esc>:Buffers<CR>
+
+imap <C-p> <Esc>:Files<CR>
+map <C-p> <Esc>:Files<CR>
+
+"imap <F2> <Esc>:CtrlPBuffer<CR>
+"map <F2> <Esc>:CtrlPBuffer<CR>
 
 imap <C-S> <Esc>:w<CR> 
 map <C-S> <Esc>:w<CR> 
@@ -171,6 +179,22 @@ let g:ctrlp_max_files=30000
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$\|node_modules$\|frontend$',
     \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$|\.jpg$' }
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+" [Tags] Command to generate tags file
+"let g:fzf_tags_command = 'ctags -R'
+" [Commands] --expect expression for directly executing the command
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
 
 "let g:ale_fixers = {
             "\   'perl': ['perl'],
