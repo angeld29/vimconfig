@@ -25,8 +25,11 @@ Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
 Plug 'WolfgangMehner/lua-support'
 Plug 'vim-scripts/L9'
-Plug 'vim-scripts/perl-support.vim'
+"Plug 'vim-scripts/perl-support.vim'
+"Plug 'vim-perl/vim-perl'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/taglist.vim'
 "Plug 'w0rp/ale'
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'Valloric/YouCompleteMe'
@@ -115,14 +118,18 @@ set visualbell
 
 set path=.,,**
 
-setlocal foldlevelstart=1
+"setlocal foldlevelstart=1
 setlocal foldmethod=syntax
-set foldnestmax=2
+set foldnestmax=5
 let perl_fold=1
-let perl_fold_blocks = 1
+"let perl_fold_blocks = 1
 let sh_fold_enabled = 1
 let perl_extended_vars=1
 let perl_sync_dist=250
+let perl_fold_anonymous_subs = 1
+let perl_nofold_packages = 1
+let perl_include_pod = 1
+let perl_sub_signatures = 1
 
 set fileencodings=utf8,cp1251
 set ffs=unix,dos
@@ -183,3 +190,10 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+"let g:tmux_navigator_no_mappings = 1
+"nnoremap <silent> C-h :TmuxNavigateLeft<cr>
+"nnoremap <silent> C-j :TmuxNavigateDown<cr>
+"nnoremap <silent> C-k :TmuxNavigateUp<cr>
+"nnoremap <silent> C-l :TmuxNavigateRight<cr>
+"nnoremap <silent> C-\\ :TmuxNavigatePrevious<cr>
+"
