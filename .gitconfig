@@ -1,3 +1,5 @@
+[core]
+editor=nvim
 #[color "branch"]
 #current = yellow reverse
 #local = yellow
