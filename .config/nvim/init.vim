@@ -21,19 +21,19 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'vim-scripts/VisIncr'
-Plug 'vim-syntastic/syntastic'
+"Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
 Plug 'WolfgangMehner/lua-support'
 Plug 'vim-scripts/L9'
-"Plug 'vim-scripts/perl-support.vim'
-"Plug 'vim-perl/vim-perl'
+Plug 'vim-scripts/perl-support.vim'
+Plug 'vim-perl/vim-perl'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/taglist.vim'
 Plug '~/utils/fzf'
 Plug 'junegunn/fzf.vim'
-"Plug 'w0rp/ale'
-"Plug 'Shougo/deoplete.nvim'
+Plug 'w0rp/ale'
+Plug 'Shougo/deoplete.nvim'
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'vimlab/neojs'
 
@@ -190,24 +190,39 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+"command! -bang -nargs=* GGrep
+"  \ call fzf#vim#grep(
+"  \   'git grep --line-number '.shellescape(<q-args>), 0,
+"  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
-
+nmap <Leader>t :TlistOpen<CR>
+nmap <Leader>r :Tags<CR>
 "let g:ale_fixers = {
-            "\   'perl': ['perl'],
-            "\}
+"            \   'perl': ['perltidy'],
+"            \}
+let g:ale_linters = {
+            \   'perl': ['perl'],
+            \}
+"let g:ale_type_map = {
+"\ 'perlcritic': {'ES': 'WS', 'E': 'W'},
+"\}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " " This is off by default.
-let g:ale_fix_on_save = 1
+let g:ale_perl_perl_options = '-c -Mwarnings -Ilib -It/lib'
+let g:ale_perl_perlcritic_showrules = 1
+"let g:ale_fix_on_save = 1
 "let g:ale_completion_enabled = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_enabled = 1
+"let g:airline#extensions#ale#enabled = 1
+
+"let Tlist_Auto_Open = 1
+"let Tlist_Show_One_File = 1
+let Tlist_Close_On_Select = 1
+let g:deoplete#enable_at_startup = 1
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
