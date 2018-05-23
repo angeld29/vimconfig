@@ -82,7 +82,7 @@ map <C-p> <Esc>:Files<CR>
 imap <C-S> <Esc>:w<CR> 
 map <C-S> <Esc>:w<CR> 
 
-map <F10> <Esc>:q<CR>
+map <F10> <Esc>:bw<CR>
 set nu!
 
 
@@ -94,7 +94,7 @@ set expandtab ts=4 sw=4 ai
 syntax on
 
 set showcmd
-set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
+set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%{fugitive#statusline()}%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
 set ls=2
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -171,6 +171,7 @@ au FileType perl setlocal foldmethod=syntax
 "autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 "autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
+let g:Lua_Ctrl_j = 'no'
 "nmap cpl :call CheckPerlSyntax()<CR>
 let g:ctrlp_extensions = ['tag']
 let g:ctrlp_max_depth=15
@@ -202,6 +203,7 @@ nmap <Leader>r :Tags<CR>
 "            \}
 let g:ale_linters = {
             \   'perl': ['perl'],
+            \   'lua': ['luac'],
             \}
 "let g:ale_type_map = {
 "\ 'perlcritic': {'ES': 'WS', 'E': 'W'},
