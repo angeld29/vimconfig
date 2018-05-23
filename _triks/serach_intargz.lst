@@ -1,0 +1,1 @@
+ tar xaf   films3.tar.gz  --to-command='perl -ne "print \$ENV{TAR_FILENAME}.\"\\n\"if /Роботам/;"'

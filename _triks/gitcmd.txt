@@ -1,0 +1,2 @@
+ git branch --merged origin/release  |grep KINO | xargs git br -d
+
