@@ -4,6 +4,7 @@ alias build='cd /home/sites/afisha.mail.ru/.www/frontend; /usr/bin/npm run build
 alias cpbtest='bin/cpb test --no-adv-lock --no-frontend'
 alias fixssh='eval $(tmux showenv -s SSH_AUTH_SOCK)'
 
+export GIT_EDITOR=nvim
 make_afisha() {
     git tag -a $1.$2 -m $1.$2
     git push origin tag $1.$2

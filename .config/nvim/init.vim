@@ -30,7 +30,7 @@ Plug 'vim-perl/vim-perl'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/taglist.vim'
-Plug 'junegunn/fzf'
+Plug '~/utils/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim'
@@ -79,9 +79,11 @@ map <C-p> <Esc>:Files<CR>
 "imap <F2> <Esc>:CtrlPBuffer<CR>
 "map <F2> <Esc>:CtrlPBuffer<CR>
 
-imap <C-S> <Esc>:w<CR> 
-map <C-S> <Esc>:w<CR> 
+imap <C-S> <Esc>:w<CR>
+map <C-S> <Esc>:w<CR>
 
+nmap <F5> <Esc>:b#<CR>
+map <F5> <Esc>:b#<CR>
 map <F10> <Esc>:bw<CR>
 set nu!
 
@@ -230,6 +232,7 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+set diffopt+=vertical
 
 "let g:tmux_navigator_no_mappings = 1
 "nnoremap <silent> C-h :TmuxNavigateLeft<cr>
