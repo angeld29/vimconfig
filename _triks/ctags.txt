@@ -1,0 +1,1 @@
+ctags --languages=perl -R -f tags .www/lib/ /home/sites/CPB/lib/

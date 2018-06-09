@@ -1,0 +1,1 @@
+curl -X POST -d 'news_id=3&title="dsadasd dasdasda"&gmt_time=2017-01-27 13:30:00+0300' http://rc-mobs.win76.dev.mail.ru/apps/pusher/send/afisha/browser/

@@ -1,0 +1,2 @@
+
+for id in $(vzlist -a | grep -v CTID | awk '{print $1}'); do linescnt=`cat /etc/vz/conf/${id}.conf | wc -l`; echo "$id - $linescnt"; done | grep -vE '(970|999|1000|1001|1002|10000) -' | grep -v ' - 44'
