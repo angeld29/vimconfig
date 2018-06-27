@@ -24,6 +24,7 @@ Plug 'vim-scripts/VisIncr'
 "Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
 Plug 'WolfgangMehner/lua-support'
+Plug 'tbastos/vim-lua'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/perl-support.vim'
 Plug 'vim-perl/vim-perl'
@@ -160,7 +161,7 @@ lang mes ru_RU.utf8
  
 set history=64
 
-set tags=./tags,tags,~/tags
+set tags=./tags,tags,../tags
 
 "autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
 
