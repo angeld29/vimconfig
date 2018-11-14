@@ -170,6 +170,7 @@ let g:xml_syntax_folding = 1
 au FileType xml setlocal foldmethod=syntax
 au FileType lua setlocal foldmethod=syntax
 au FileType perl setlocal foldmethod=syntax
+autocmd FileType perl call deoplete#custom#buffer_option('auto_complete', v:false)
 "au FileType javascript call JavaScriptFold()
 "autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 "autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
@@ -208,9 +209,9 @@ let g:ale_linters = {
             \   'perl': ['perl'],
             \   'lua': ['luac'],
             \}
-"let g:ale_type_map = {
-"\ 'perlcritic': {'ES': 'WS', 'E': 'W'},
-"\}
+let g:ale_type_map = {
+\ 'perlcritic': {'ES': 'WS', 'E': 'W'},
+\}
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " " This is off by default.
@@ -228,6 +229,11 @@ let g:ale_completion_enabled = 1
 "let Tlist_Show_One_File = 1
 let Tlist_Close_On_Select = 1
 let g:deoplete#enable_at_startup = 1
+
+let g:lua_check_syntax = 1
+let g:lua_complete_omni = 1
+let g:lua_complete_dynamic = 1
+let g:lua_define_completion_mappings = 1
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
