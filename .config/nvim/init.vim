@@ -150,14 +150,14 @@ set cursorline
 "let g:solarized_use16 = 1
 let g:solarized_termcolors=256
 set background=dark
-colorscheme solarized
+!silent colorscheme solarized
 "colorscheme NeoSolarized
 "set termguicolors
 
 set termencoding=utf8
 set langmenu=ru_ru 
 set helplang=ru,en 
-lang mes ru_RU.utf8
+"lang mes ru_RU.utf8
  
 set history=64
 
