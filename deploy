@@ -2,5 +2,5 @@ cp -R .config ~
 cp .gitconfig  ~
 cp .tmux.conf  ~
 
-echo 'export TERM=xterm-256color' >> ~/.bash_rc
+cat .bashrc  >> ~/.bashrc
 
