@@ -1,0 +1,27 @@
+yum -y install ninja-build libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip
+git clone https://github.com/neovim/neovim.git
+
+rm -r build
+make clean
+make CMAKE_BUILD_TYPE=Release
+
+rm -r build/  # clear the CMake cache
+make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/neovim"
+make install
+export PATH="$HOME/neovim/bin:$PATH"
+
+
+yum install the_silver_searcher
+
+#deoplete
+pip3 install --user pynvim
+
+
+pip2 install --user neovim
+pip3 install --user neovim
+
+yum install python34-setuptools
+easy_install-3.4 pip
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
