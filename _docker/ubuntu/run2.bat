@@ -1,0 +1,1 @@
+docker run --name nvim  -d -P  -p32770:22 -v c:/Angel/Prog:/data sshd 
