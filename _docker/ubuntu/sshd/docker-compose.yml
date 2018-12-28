@@ -1,0 +1,8 @@
+version: '3'
+services:
+  ssh:
+    build: .
+    ports:
+     - "32770:22"
+  cfg:
+    image: "ubuntu-mycfg"
