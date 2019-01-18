@@ -1,5 +1,5 @@
 FROM ubuntu-nvim
-RUN apt-get install ctags -y
+RUN apt-get -y install ctags tmux  git-core bash-completion
 RUN git clone https://github.com/angeld29/vimconfig.git && cd vimconfig && ./deploy
 RUN mkdir utils
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/utils/fzf
