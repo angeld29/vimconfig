@@ -11,6 +11,9 @@ make_afisha() {
     bin/dev/rpmbuild.sh afisha $1 $2
 }
 export TERM=xterm-256color
+PS1="\[\e[0;32m\][\u@\h \W](\$(git branch 2>/dev/null | grep '*' | sed -e 's/\* //'))\\$\[\e[0m\] "
 if [ -t 0 ]; then   # only run if stdin is a terminal
     stty -ixon
 fi
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g "" --ignore "frontend/"'
+
