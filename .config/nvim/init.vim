@@ -242,7 +242,13 @@ noremap <Right> <Nop>
 set diffopt+=vertical
 
 command Qvmmake set makeprg=cmake\ --build\ _cmake/qvm/\ --target\ qvm
+imap <C-_> <Esc>
+map <C-_> <Esc>
+
 set keymap=russian-dvorak
+set iminsert=0
+set imsearch=0
+highlight lCursor guifg=NONE guibg=Cyan
 "let g:tmux_navigator_no_mappings = 1
 "nnoremap <silent> C-h :TmuxNavigateLeft<cr>
 "nnoremap <silent> C-j :TmuxNavigateDown<cr>
