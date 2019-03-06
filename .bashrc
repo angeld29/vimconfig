@@ -17,3 +17,4 @@ if [ -t 0 ]; then   # only run if stdin is a terminal
 fi
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g "" --ignore "frontend/"'
 
+alias qvm='cmake  --build _cmake/qvm/ --target qvm && cp _cmake/qvm/qwprogs.* ../../qwtf/fortress/'

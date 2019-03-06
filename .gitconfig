@@ -34,3 +34,5 @@ fdiff = diff --name-only
 [log]
 	decorate = full
 
+[push]
+        default = current
