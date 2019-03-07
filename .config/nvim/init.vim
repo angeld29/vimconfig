@@ -18,7 +18,7 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized'
 "Plug 'kien/ctrlp.vim'
-Plug 'tmhedberg/matchit'
+"Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'vim-scripts/VisIncr'
 "Plug 'vim-syntastic/syntastic'
@@ -30,6 +30,7 @@ Plug 'vim-scripts/perl-support.vim'
 Plug 'vim-perl/vim-perl'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-scripts/taglist.vim'
 Plug '~/utils/fzf'
 Plug 'junegunn/fzf.vim'
@@ -46,6 +47,7 @@ Plug 'Shougo/deoplete.nvim'
 "Bundle 'closetag.vim'
 "Bundle 'c9s/perlomni.vim'
 call plug#end()
+runtime macros/matchit.vim
 
 set cmdheight=2                       " Make command line two lines high
 set mousehide                         " Hide the mouse when typing text
@@ -63,7 +65,7 @@ nmap <c-pagedown>  <Esc>:tabnext<CR>
 
 map <s-tab>  <Esc>:tabprev<CR>
 nmap <s-tab>  <Esc>:tabprev<CR>
-nmap <tab>  <Esc>:tabnext<CR>
+"nmap <tab>  <Esc>:tabnext<CR>
 
 nnoremap <F8> :nohlsearch<CR>
 
@@ -82,6 +84,9 @@ map <C-p> <Esc>:Files<CR>
 
 imap <C-S> <Esc>:w<CR>
 map <C-S> <Esc>:w<CR>
+imap <C-_> <Esc>
+map <C-_> <Esc>
+ 
 
 nmap <F5> <Esc>:b#<CR>
 map <F5> <Esc>:b#<CR>
@@ -170,7 +175,7 @@ let g:xml_syntax_folding = 1
 au FileType xml setlocal foldmethod=syntax
 au FileType lua setlocal foldmethod=syntax
 au FileType perl setlocal foldmethod=syntax
-autocmd FileType perl call deoplete#custom#buffer_option('auto_complete', v:false)
+"autocmd FileType perl call deoplete#custom#buffer_option('auto_complete', v:false)
 "au FileType javascript call JavaScriptFold()
 "autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 "autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
@@ -241,14 +246,13 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 set diffopt+=vertical
 
-command Qvmmake set makeprg=cmake\ --build\ _cmake/qvm/\ --target\ qvm
 imap <C-_> <Esc>
 map <C-_> <Esc>
+cmap <C-_> <Esc>
+cmap qj <Esc>
+imap qj <Esc>
 
 set keymap=russian-dvorak
-set iminsert=0
-set imsearch=0
-highlight lCursor guifg=NONE guibg=Cyan
 "let g:tmux_navigator_no_mappings = 1
 "nnoremap <silent> C-h :TmuxNavigateLeft<cr>
 "nnoremap <silent> C-j :TmuxNavigateDown<cr>
