@@ -246,11 +246,13 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 set diffopt+=vertical
 
-imap <C-_> <Esc>
-map <C-_> <Esc>
-cmap <C-_> <Esc>
-cmap qj <Esc>
-imap qj <Esc>
+inoremap <C-_> <Esc>
+tnoremap <C-_> <Esc>
+ noremap <C-_> <Esc>
+cnoremap <C-_> <Esc>
+"cnoremap qj <Esc>
+"inoremap qj <Esc>
+"tnoremap qj <Esc>
 
 set keymap=russian-dvorak
 "let g:tmux_navigator_no_mappings = 1
