@@ -53,6 +53,7 @@ set cmdheight=2                       " Make command line two lines high
 set mousehide                         " Hide the mouse when typing text
 "set mouse=a
 
+set keymap=russian-dvorak
 "set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
 set iminsert=0                  " раскладка по умолчанию для ввода - английская
 set imsearch=0                  " раскладка по умолчанию для поиска - английская
@@ -258,7 +259,6 @@ cnoremap <C-_> <Esc>
 "inoremap qj <Esc>
 "tnoremap qj <Esc>
 
-set keymap=russian-dvorak
 "let g:tmux_navigator_no_mappings = 1
 "nnoremap <silent> C-h :TmuxNavigateLeft<cr>
 "nnoremap <silent> C-j :TmuxNavigateDown<cr>
