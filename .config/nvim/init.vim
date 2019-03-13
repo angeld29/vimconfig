@@ -76,8 +76,11 @@ map <F4> <Esc>:tabnew<CR>
 imap <F2> <Esc>:Buffers<CR>
 map <F2> <Esc>:Buffers<CR>
 
-imap <C-p> <Esc>:Files<CR>
-map <C-p> <Esc>:Files<CR>
+imap <F3> <Esc>:Files<CR>
+map <F3> <Esc>:Files<CR>
+
+"imap <C-p> <Esc>:Files<CR>
+"map <C-p> <Esc>:Files<CR>
 
 "imap <F2> <Esc>:CtrlPBuffer<CR>
 "map <F2> <Esc>:CtrlPBuffer<CR>
@@ -207,6 +210,7 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 nmap <Leader>t :TlistOpen<CR>
 nmap <Leader>r :Tags<CR>
+nmap <Leader>p :Files<CR>
 "let g:ale_fixers = {
 "            \   'perl': ['perltidy'],
 "            \}
