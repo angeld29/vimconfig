@@ -53,6 +53,7 @@ set cmdheight=2                       " Make command line two lines high
 set mousehide                         " Hide the mouse when typing text
 "set mouse=a
 
+set keymap=russian-dvorak
 "set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
 set keymap=russian-dvorakpr
 set iminsert=0                  " раскладка по умолчанию для ввода - английская
