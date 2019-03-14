@@ -20,7 +20,7 @@ Plug 'iCyMind/NeoSolarized'
 "Plug 'kien/ctrlp.vim'
 "Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/AutoComplPop'
-Plug 'vim-scripts/VisIncr'
+"Plug 'vim-scripts/VisIncr'
 "Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
 Plug 'WolfgangMehner/lua-support'
@@ -54,6 +54,7 @@ set mousehide                         " Hide the mouse when typing text
 "set mouse=a
 
 "set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
+set keymap=russian-dvorakpr
 set iminsert=0                  " раскладка по умолчанию для ввода - английская
 set imsearch=0                  " раскладка по умолчанию для поиска - английская
 
@@ -258,7 +259,7 @@ cnoremap <C-_> <Esc>
 "inoremap qj <Esc>
 "tnoremap qj <Esc>
 
-set keymap=russian-dvorak
+setlocal spell spelllang=ru_ru,en_us
 "let g:tmux_navigator_no_mappings = 1
 "nnoremap <silent> C-h :TmuxNavigateLeft<cr>
 "nnoremap <silent> C-j :TmuxNavigateDown<cr>
