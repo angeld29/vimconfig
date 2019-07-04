@@ -1,11 +1,13 @@
-alias ubuild='docker-compose up -d --no-deps --build kino-back'
+# User specific aliases and functions
+alias ubuild='docker-compose up -d --no-deps --build back'
 alias urestart='docker-compose restart back'
 alias ngrestart='docker-compose up -d --no-deps --build nginx'
+#alias ulog="tail -f /logs/afisha.mail.ru/uwsgi-afisha-error.log"
+alias build='cd /home/sites/afisha.mail.ru/.www/frontend; /usr/bin/npm run build:dev'
 alias baseupdate='docker-compose stop mysql &&   docker-compose rm mysql &&  docker volume rm kino_mysql-dir &&  docker-compose up -d --no-deps mysql'
 alias ulog="docker exec -it kino-back tail -f /logs/afisha.mail.ru/uwsgi-afisha-error.log"
-alias build='cd /home/sites/afisha.mail.ru/.www/frontend; /usr/bin/npm run build:dev'
 alias cpbtest='bin/cpb test --no-adv-lock --no-frontend'
-alias fixssh='eval $(tmux showenv -s SSH_AUTH_SOCK)'
+alias fixssh='eval $(tmux showenv SSH_AUTH_SOCK)'
 
 export GIT_EDITOR=nvim
 make_afisha() {

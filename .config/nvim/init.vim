@@ -14,14 +14,12 @@ set nocompatible
 filetype off
 filetype plugin indent on
 call plug#begin('~/.config/nvim/plugins')
-Plug 'lifepillar/vim-solarized8'
+"Plug 'lifepillar/vim-solarized8'
+"Plug 'iCyMind/NeoSolarized'
+
 Plug 'altercation/vim-colors-solarized'
-Plug 'iCyMind/NeoSolarized'
-"Plug 'kien/ctrlp.vim'
-"Plug 'tmhedberg/matchit'
+
 Plug 'vim-scripts/AutoComplPop'
-"Plug 'vim-scripts/VisIncr'
-"Plug 'vim-syntastic/syntastic'
 Plug 'c9s/perlomni.vim'
 Plug 'WolfgangMehner/lua-support'
 Plug 'tbastos/vim-lua'
@@ -36,16 +34,15 @@ Plug '~/utils/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim'
+
 "Plug 'Valloric/YouCompleteMe'
 "Plug 'vimlab/neojs'
 
-"Bundle 'L9'
-""Bundle 'FuzzyFinder'
+"Plug 'vim-scripts/VisIncr'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'kien/ctrlp.vim'
+"Plug 'tmhedberg/matchit'
 
-"Bundle 'zencoding.vim'
-"Bundle 'xml.vim'
-"Bundle 'closetag.vim'
-"Bundle 'c9s/perlomni.vim'
 call plug#end()
 runtime macros/matchit.vim
 
@@ -53,7 +50,7 @@ set cmdheight=2                       " Make command line two lines high
 set mousehide                         " Hide the mouse when typing text
 "set mouse=a
 
-set keymap=russian-dvorak
+"set keymap=russian-dvorak
 "set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
 set keymap=russian-dvorakpr
 set iminsert=0                  " раскладка по умолчанию для ввода - английская
@@ -140,9 +137,9 @@ set visualbell
 set path=.,,**
 
 "setlocal foldlevelstart=1
-setlocal foldmethod=syntax
+"setlocal foldmethod=syntax
 set foldnestmax=5
-let perl_fold=1
+"let perl_fold=1
 "let perl_fold_blocks = 1
 let sh_fold_enabled = 1
 let perl_extended_vars=1
@@ -179,7 +176,8 @@ let g:xml_syntax_folding = 1
 
 au FileType xml setlocal foldmethod=syntax
 au FileType lua setlocal foldmethod=syntax
-au FileType perl setlocal foldmethod=syntax
+au FileType yml setlocal shiftwidth=2
+"au FileType perl setlocal foldmethod=syntax
 "autocmd FileType perl call deoplete#custom#buffer_option('auto_complete', v:false)
 "au FileType javascript call JavaScriptFold()
 "autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
@@ -213,9 +211,9 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 nmap <Leader>t :TlistOpen<CR>
 nmap <Leader>r :Tags<CR>
 nmap <Leader>p :Files<CR>
-"let g:ale_fixers = {
-"            \   'perl': ['perltidy'],
-"            \}
+let g:ale_fixers = {
+            \   'perl': ['perltidy'],
+            \}
 let g:ale_linters = {
             \   'perl': ['perl'],
             \   'lua': ['luac'],
