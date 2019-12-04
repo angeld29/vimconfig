@@ -28,7 +28,7 @@ RUN pip3 install --upgrade pip
 
 
 RUN apt-get -y install ctags tmux  git-core bash-completion curl silversearcher-ag
-RUN git clone https://github.com/angeld29/vimconfig.git && cd vimconfig && ./deploy
+RUN git clone https://github.com/angeld29/vimconfig.git && cd vimconfig && ./deploy_vim
 RUN mkdir utils && git clone --depth 1 https://github.com/junegunn/fzf.git ~/utils/fzf && ~/utils/fzf/install --all
 RUN vim -c 'PlugInstall' -c 'qa!' 
 RUN vim -c 'UpdateRemotePlugins' -c 'qa!' 

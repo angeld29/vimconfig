@@ -3,9 +3,9 @@
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  cmd = vim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [core]
-	editor = nvim
+  editor = vim
 #[color "branch"]
 #current = yellow reverse
 #local = yellow
