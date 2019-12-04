@@ -8,6 +8,7 @@ alias baseupdate='docker-compose stop mysql &&   docker-compose rm mysql &&  doc
 alias ulog="docker exec -it kino-back tail -f /logs/afisha.mail.ru/uwsgi-afisha-error.log"
 alias cpbtest='bin/cpb test --no-adv-lock --no-frontend'
 alias fixssh='eval $(tmux showenv SSH_AUTH_SOCK)'
+alias nvim='~/bin/nvim.appimage'
 
 export GIT_EDITOR=nvim
 make_afisha() {

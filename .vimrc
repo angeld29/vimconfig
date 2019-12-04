@@ -14,8 +14,9 @@ set nocompatible
 filetype off
 filetype plugin indent on
 call plug#begin('~/.vim/plugins')
-"Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-solarized8'
 "Plug 'iCyMind/NeoSolarized'
+
 
 Plug 'altercation/vim-colors-solarized'
 
@@ -158,8 +159,10 @@ set cursorline
 
 "let g:solarized_use16 = 1
 let g:solarized_termcolors=256
+set term=screen-256color
+set t_Co=256
 set background=dark
-silent! colorscheme solarized
+silent! colorscheme solarized8
 "colorscheme NeoSolarized
 "set termguicolors
 
