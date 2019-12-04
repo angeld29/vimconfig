@@ -1,0 +1,11 @@
+version: '3.5'
+services:
+  vim:
+    image: "ubuntu-vim"
+    build: 
+       context: ./
+       dockerfile: ./Dockerfile
+    volumes:
+       - "c:/Angel/Prog:/data"
+    ports:
+       - "32771:22"

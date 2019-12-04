@@ -13,7 +13,7 @@
 set nocompatible
 filetype off
 filetype plugin indent on
-call plug#begin('~/.config/vim/plugins')
+call plug#begin('~/.vim/plugins')
 "Plug 'lifepillar/vim-solarized8'
 "Plug 'iCyMind/NeoSolarized'
 
