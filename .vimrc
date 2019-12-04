@@ -262,7 +262,7 @@ cnoremap <C-_> <Esc>
 "inoremap qj <Esc>
 "tnoremap qj <Esc>
 
-setlocal spell spelllang=ru_ru,en_us
+"setlocal spell spelllang=ru_ru,en_us
 "let g:tmux_navigator_no_mappings = 1
 "nnoremap <silent> C-h :TmuxNavigateLeft<cr>
 "nnoremap <silent> C-j :TmuxNavigateDown<cr>
