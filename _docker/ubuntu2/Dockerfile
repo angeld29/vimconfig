@@ -26,8 +26,7 @@ RUN apt-get install -y python-dev python-pip python3-dev python3-pip
 RUN pip3 install --user pynvim
 RUN pip3 install --upgrade pip
 
-
-RUN apt-get -y install ctags tmux  git-core bash-completion curl silversearcher-ag
+RUN apt-get -y install ctags tmux  git-core bash-completion curl silversearcher-ag clang-tidy
 RUN git clone https://github.com/angeld29/vimconfig.git && cd vimconfig && ./deploy_vim
 RUN mkdir utils && git clone --depth 1 https://github.com/junegunn/fzf.git ~/utils/fzf && ~/utils/fzf/install --all
 RUN vim -c 'PlugInstall' -c 'qa!' 
