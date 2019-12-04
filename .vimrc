@@ -12,144 +12,114 @@
 "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 filetype plugin indent on
+call plug#begin('~/.config/vim/plugins')
+"Plug 'lifepillar/vim-solarized8'
+"Plug 'iCyMind/NeoSolarized'
 
-"Bundle 'vundle'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'kien/ctrlp.vim'
-Bundle 'matchit.zip'
-Bundle 'lua-support'
+Plug 'altercation/vim-colors-solarized'
 
-Bundle 'syntastic'
-Bundle 'AutoComplPop'
-Bundle 'L9'
-"Bundle 'FuzzyFinder'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'vim-scripts/AutoComplPop'
+Plug 'c9s/perlomni.vim'
+Plug 'WolfgangMehner/lua-support'
+Plug 'tbastos/vim-lua'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/perl-support.vim'
+Plug 'vim-perl/vim-perl'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/taglist.vim'
+Plug '~/utils/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
+Plug 'Shougo/deoplete.nvim'
 
-Bundle 'perl-support.vim'
-Bundle 'zencoding.vim'
-Bundle 'xml.vim'
-"Bundle 'sql.vim'
-"Bundle 'sqlplus.vim'
-Bundle 'closetag.vim'
-"Bundle 'taglist.vim'
-Bundle 'jelera/vim-javascript-syntax'
-"Bundle 'vim-perl/vim-perl'
-Bundle 'NLKNguyen/pipe.vim'
-Bundle 'NLKNguyen/pipe-mysql.vim'
-Bundle 'c9s/perlomni.vim'
-Bundle 'fatih/vim-go'
-Bundle 'vitorleal/vim-go-syntax'
-"Bundle 'osfameron/perl-tags-vim'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'vimlab/neojs'
 
+"Plug 'vim-scripts/VisIncr'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'kien/ctrlp.vim'
+"Plug 'tmhedberg/matchit'
 
-"source $VIMRUNTIME/vimrc_example.vim
-"behave mswin
+call plug#end()
+runtime macros/matchit.vim
+
 set cmdheight=2                       " Make command line two lines high
 set mousehide                         " Hide the mouse when typing text
+"set mouse=a
 
-"-------------------------------------------------------------------------------
-" Moving cursor to other windows:
-" shift down   : change window focus to lower one (cyclic)
-" shift up     : change window focus to upper one (cyclic)
-" shift left   : change window focus to one on left
-" shift right  : change window focus to one on right
-"-------------------------------------------------------------------------------
-"nnoremap <s-down>   <c-w>w
-"nnoremap <s-up>     <c-w>W
-"nnoremap <s-left>   <c-w>h
-"nnoremap <s-right>  <c-w>l
-"
-"-------------------------------------------------------------------------------
-"  Some additional hot keys:
-"    S-F3  -  call gvim file browser
-"-------------------------------------------------------------------------------
-" noremap  <silent> <s-F3>       :silent browse confirm e<CR>
-"inoremap  <silent> <s-F3>  <Esc>:silent browse confirm e<CR>
-"
-"-------------------------------------------------------------------------------
-" toggle insert mode <--> 'normal mode with the <RightMouse>-key
-"-------------------------------------------------------------------------------
-"nnoremap  <RightMouse> <Insert>
-"inoremap  <RightMouse> <ESC>
-"
-"-------------------------------------------------------------------------------
-" use font with clearly distinguishable brackets : ()[]{}
-"-------------------------------------------------------------------------------
-"set guifont=Luxi\ Mono\ 14
-"if argc() == 0
-"  autocmd VimLeavePre * silent mksession! $HOME/.vim/lastSession.vim
-"endif
-
-"autocmd VimLeavePre * silent mksession! $HOME/lastSession.vim
-"autocmd VimEnter * silent source $HOME/lastSession.vim
-
-"if getfsize("$HOME/.vim/lastSession.vim") >= 0
-"        source $HOME/.vim/lastSession.vim
-"endif
-
-"set nocompatible
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
+"set keymap=russian-dvorak
+"set keymap=russian-jcukenwin    " настраиваем переключение раскладок клавиатуры по C-^
+set keymap=russian-dvorakpr
+set iminsert=0                  " раскладка по умолчанию для ввода - английская
+set imsearch=0                  " раскладка по умолчанию для поиска - английская
 
 set guifont=Lucida\ Console:h10:cRUSSIAN
-
 set iskeyword=@,48-57,_,192-255
-
-"nnoremap <c-tab>  :tabnext<CR>
-"nnoremap <c-s-tab>  :tabprev<CR>
 map <c-pageup>  <Esc>:tabprev<CR>
 nmap <c-pageup>  <Esc>:tabprev<CR>
 nmap <c-pagedown>  <Esc>:tabnext<CR>
 
 map <s-tab>  <Esc>:tabprev<CR>
 nmap <s-tab>  <Esc>:tabprev<CR>
-nmap <tab>  <Esc>:tabnext<CR>
+"nmap <tab>  <Esc>:tabnext<CR>
 
-"nnoremap * *N
 nnoremap <F8> :nohlsearch<CR>
 
 imap <F4> <Esc>:tabnew<CR>
-":CtrlP<CR>
-":FufFile<CR>
 
 map <F4> <Esc>:tabnew<CR>
-":CtrlP<CR>
-":FufFile<CR>
 
-imap <F2> <Esc>:CtrlPBuffer<CR>
-map <F2> <Esc>:CtrlPBuffer<CR>
+imap <F2> <Esc>:Buffers<CR>
+map <F2> <Esc>:Buffers<CR>
 
-imap <F6> <Esc>:mksession! $HOME/.vim/lastSession.vim<CR>
-map <F6> <Esc>:mksession! $HOME/.vim/lastSession.vim<CR>
-map <F9> <Esc>:source $HOME/.vim/lastSession.vim<CR>
+imap <F3> <Esc>:Files<CR>
+map <F3> <Esc>:Files<CR>
 
-imap <C-S> <Esc>:w<CR> 
-map <C-S> <Esc>:w<CR> 
+"imap <C-p> <Esc>:Files<CR>
+"map <C-p> <Esc>:Files<CR>
 
-map <F10> <Esc>:qa<CR>
+"imap <F2> <Esc>:CtrlPBuffer<CR>
+"map <F2> <Esc>:CtrlPBuffer<CR>
+
+imap <C-S> <Esc>:w<CR>
+map <C-S> <Esc>:w<CR>
+imap <C-_> <Esc>
+map <C-_> <Esc>
+ 
+
+nmap <F5> <Esc>:b#<CR>
+map <F5> <Esc>:b#<CR>
+map <F10> <Esc>:bw<CR>
 set nu!
 
-map <F7> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
-set wildmode=longest,list
-
-set columns=999
-set lines=999
 
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
-set expandtab ts=4 sw=4 ss=4 ai
+set expandtab ts=4 sw=4 ai
 syntax on
-"syntax enable
-
-
 
 set showcmd
-set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
+set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%{fugitive#statusline()}%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
 set ls=2
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_quiet_messages = { 'regex': 'malformed number' }
+let g:syntastic_perl_checkers=['perl']
+
 
 set wrap
 set linebreak
@@ -166,166 +136,137 @@ set noswapfile
 
 set visualbell
 
-
-:map [[ ?{<CR>w99[{
-:map ][ /}<CR>b99]}
-:map ]] j0[[%/{<CR>
-:map [] k$][%?}<CR>
-
-":inoremap ( ()<Esc>i
-":inoremap { {}<Esc>i
-":inoremap [ []<Esc>i
-":inoremap < <><Esc>i
 set path=.,,**
 
-let Tlist_GainFocus_On_ToggleOpen = 1
-imap <F5> <Esc>:TlistToggle<CR> 
-map <F5> <Esc>:TlistToggle<CR> 
-
-setlocal foldlevelstart=0
-setlocal foldmethod=syntax
-set foldnestmax=3
-let perl_fold=1
-let perl_fold_blocks = 0
-
-
-" ???? Encoding -->
-    set wildmenu
-    set wcm=<Tab>
-    menu Encoding.Read.utf-8<Tab><F7> :e ++enc=utf8 <CR>
-    menu Encoding.Read.windows-1251<Tab><F7> :e ++enc=cp1251<CR>
-    menu Encoding.Read.koi8-r<Tab><F7> :e ++enc=koi8-r<CR>
-    menu Encoding.Read.cp866<Tab><F7> :e ++enc=cp866<CR>
-    map <F7> :emenu Encoding.Read.<TAB>
-
-    set wildmenu
-    set wcm=<Tab>
-    menu Encoding.Write.utf-8<Tab><S-F7> :set fenc=utf8 <CR>
-    menu Encoding.Write.windows-1251<Tab><S-F7> :set fenc=cp1251<CR>
-    menu Encoding.Write.koi8-r<Tab><S-F7> :set fenc=koi8-r<CR>
-    menu Encoding.Write.cp866<Tab><S-F7> :set fenc=cp866<CR>
-    map <S-F7> :emenu Encoding.Write.<TAB>
-
-" ????? ??????? ?????? ????? (dos - <CR><NL>, unix - <NL>, mac - <CR>) -->
-    set wildmenu
-    set wcm=<Tab>
-    menu Encoding.End_line_format.unix<Tab><C-F7> :set fileformat=unix<CR>
-    menu Encoding.End_line_format.dos<Tab><C-F7> :set fileformat=dos<CR>
-    menu Encoding.End_line_format.mac<Tab><C-F7> :set fileformat=mac<CR>
-    map <C-F7> :emenu Encoding.End_line_format.<TAB>
-" ????? ??????? ?????? ????? (dos - <CR><NL>, unix - <NL>, mac - <CR>) <--
-" ???? Encoding <--
-
-
+"setlocal foldlevelstart=1
+"setlocal foldmethod=syntax
+set foldnestmax=5
+"let perl_fold=1
+"let perl_fold_blocks = 1
+let sh_fold_enabled = 1
+let perl_extended_vars=1
+let perl_sync_dist=250
+let perl_fold_anonymous_subs = 1
+let perl_nofold_packages = 1
+let perl_include_pod = 1
+let perl_sub_signatures = 1
 
 set fileencodings=utf8,cp1251
 set ffs=unix,dos
 set fileformat=unix
 set cursorline
 
-
-"set keymap=russian-jcukenwin
-"set iminsert=0
-"set imsearch=0
-"highlight lCursor guifg=NONE guibg=Cyan
-
-"imap :!setxkbmap us:!setxkbmap us,ru
-"nmap :!setxkbmap us:!setxkbmap us,ru
-
-
-map gr :diffget 3<CR>
-map gl :diffget 1<CR>
-map g1 :diffget 2<CR>
-map g2 :diffget 3<CR>
-map g3 :diffget 4<CR>
-set diffopt+=iwhite
-
-
-"##############################################
-set termencoding=utf8
-set term=xterm-256color
-set t_Co=256 
-"let &t_AB="\e[48;5;%dm" 
-"let &t_AF="\e[38;5;%dm" 
- 
+"let g:solarized_use16 = 1
 let g:solarized_termcolors=256
-"let g:solarized_termtrans = 1
-"let g:solarized_underline=0
 set background=dark
-colorscheme solarized
+silent! colorscheme solarized
+"colorscheme NeoSolarized
+"set termguicolors
 
+set encoding=utf-8
+set termencoding=utf8
 set langmenu=ru_ru 
 set helplang=ru,en 
-lang mes ru_RU.utf8
-
-
-let g:netrw_cygwin=0 
-let g:netrw_scp_cmd='scp' 
-let g:netrw_silent=1 
-let g:netrw_use_nt_rcp = 0 
-let g:netrw_banner=0 
-let $ROOT="scp://angeld@kitezhgrad5.combats.ru/sites/combats.ru/" 
-let $TROOT=$ROOT."web/mobtmpl/" 
+"lang mes ru_RU.utf8
  
-cabbrev ew tabnew $TROOT 
+set history=64
 
-if version >= 700
-    set history=64
-"    set undolevels=128
-	"    set undodir=~/.vim/undodir/
-"    set undofile
-"    set undolevels=1000
-"    set undoreload=10000
-endif
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
-"autocmd FileType html set omnifunc=htmlcomplete#CompleteTags noci
+set tags=./tags,tags,../tags
+
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
+
 let g:xml_syntax_folding = 1
-set tags=./tags,tags,~/tags
+
 au FileType xml setlocal foldmethod=syntax
 au FileType lua setlocal foldmethod=syntax
-au FileType javascript call JavaScriptFold()
-autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-source ~/.vimrc_mail
-func! CheckPerlSyntax()
-	let mpr = &makeprg
-	let ef = &errorformat
-	let exeFile = expand("%:t")
-	let l:currentbuffer   = bufname("%")
-	let l:fullname        = expand("%:p")
-	exe ':setlocal makeprg=perl\ -c'
-	exe ':set errorformat=
-				\%-G%.%#had\ compilation\ errors.,
-				\%-G%.%#syntax\ OK,
-				\%m\ at\ %f\ line\ %l.,
-				\%+A%.%#\ at\ %f\ line\ %l\\,%.%#,
-				\%+C%.%#'
-	silent exe  ':make  '. shellescape (l:fullname) 
-	exe ":botright cwindow"
-	let &makeprg     = mpr
-	let &errorformat = ef
-	redraw!
-	if l:currentbuffer ==  bufname("%")
-		echohl Search
-		echomsg l:currentbuffer." : Syntax is OK"
-		echohl None
-		return 0
-	else
-		setlocal wrap
-		setlocal linebreak
-	endif
+au FileType yml setlocal shiftwidth=2
+"au FileType perl setlocal foldmethod=syntax
+"autocmd FileType perl call deoplete#custom#buffer_option('auto_complete', v:false)
+"au FileType javascript call JavaScriptFold()
+"autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+"autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-endfunc
-
-"nmap pl :!perl %<.pl<CR>
-"map <S-F9> :call CheckPerlSyntax()<CR>
-nmap cpl :call CheckPerlSyntax()<CR>
+let g:Lua_Ctrl_j = 'no'
+"nmap cpl :call CheckPerlSyntax()<CR>
+let g:ctrlp_extensions = ['tag']
 let g:ctrlp_max_depth=15
-let g:go_version_warning = 0
+let g:ctrlp_max_files=30000 
 
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|node_modules$\|frontend$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$|\.jpg$' }
 
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+" [Tags] Command to generate tags file
+"let g:fzf_tags_command = 'ctags -R'
+" [Commands] --expect expression for directly executing the command
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+"command! -bang -nargs=* GGrep
+"  \ call fzf#vim#grep(
+"  \   'git grep --line-number '.shellescape(<q-args>), 0,
+"  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
 
+nmap <Leader>t :TlistOpen<CR>
+nmap <Leader>r :Tags<CR>
+nmap <Leader>p :Files<CR>
+let g:ale_fixers = {
+            \   'perl': ['perltidy'],
+            \}
+let g:ale_linters = {
+            \   'perl': ['perl'],
+            \   'lua': ['luac'],
+            \   'cpp': ['clangtidy'],
+            \}
+let g:ale_type_map = {
+\ 'perlcritic': {'ES': 'WS', 'E': 'W'},
+\}
+
+" Set this setting in vimrc if you want to fix files automatically on save.
+" " This is off by default.
+let g:ale_perl_perl_options = '-c -Mwarnings -Ilib -It/lib'
+let g:ale_perl_perlcritic_showrules = 1
+"let g:ale_fix_on_save = 1
+"let g:ale_completion_enabled = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:ale_sign_column_always = 1
+let g:ale_completion_enabled = 1
+"let g:airline#extensions#ale#enabled = 1
+
+"let Tlist_Auto_Open = 1
+"let Tlist_Show_One_File = 1
+let Tlist_Close_On_Select = 1
+let g:deoplete#enable_at_startup = 1
+
+let g:lua_check_syntax = 1
+let g:lua_complete_omni = 1
+let g:lua_complete_dynamic = 1
+let g:lua_define_completion_mappings = 1
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+set diffopt+=vertical
+
+inoremap <C-_> <Esc>
+tnoremap <C-_> <Esc>
+ noremap <C-_> <Esc>
+cnoremap <C-_> <Esc>
+"cnoremap qj <Esc>
+"inoremap qj <Esc>
+"tnoremap qj <Esc>
+
+setlocal spell spelllang=ru_ru,en_us
+"let g:tmux_navigator_no_mappings = 1
+"nnoremap <silent> C-h :TmuxNavigateLeft<cr>
+"nnoremap <silent> C-j :TmuxNavigateDown<cr>
+"nnoremap <silent> C-k :TmuxNavigateUp<cr>
+"nnoremap <silent> C-l :TmuxNavigateRight<cr>
+"nnoremap <silent> C-\\ :TmuxNavigatePrevious<cr>
+"
