@@ -158,6 +158,8 @@ set cursorline
 set termguicolors
 "let g:solarized_use16 = 1
 let g:solarized_termcolors=256
+set term=screen-256color
+set t_Co=256
 set background=dark
 "silent! colorscheme solarized
 colorscheme NeoSolarized
