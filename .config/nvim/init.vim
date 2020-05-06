@@ -263,5 +263,5 @@ nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
 nmap gc <Plug>(coc-git-commit)
 
-command! -nargs=0 cocRename :call CocActionAsync('rename')
+command! -nargs=0 CocRename :call CocActionAsync('rename')
 
