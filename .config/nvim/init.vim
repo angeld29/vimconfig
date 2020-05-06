@@ -17,6 +17,7 @@ Plug 'vim-scripts/VisIncr'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -190,7 +191,8 @@ let g:ale_type_map = {
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " " This is off by default.
-let g:ale_perl_perl_options = '-c -Mwarnings -Ilib -It/lib'
+let g:ale_perl_perl_options = '-c -Mwarnings -Ilib -I/home/sites/CPB/lib '
+let g:ale_perl_perl_executable = 'docker exec -it kino-back  perl'
 let g:ale_perl_perlcritic_showrules = 1
 "let g:ale_fix_on_save = 1
 let g:ale_sign_error = '>>'
@@ -216,7 +218,7 @@ set completeopt=longest,menuone,preview ",popuphidden
 "" " documentation.
 ""set completepopup=highlight:Pmenu,border:off
 set previewheight=5
-let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css','coc-git',  'coc-yaml']"
+let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax']"
 
 "====================== COC ============================================
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -229,6 +231,23 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -259,9 +278,9 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 "========== Coc git =================================
 " show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
+"nmap gs <Plug>(coc-git-chunkinfo)
 " show commit contains current position
-nmap gc <Plug>(coc-git-commit)
+"nmap gc <Plug>(coc-git-commit)
 
 command! -nargs=0 CocRename :call CocActionAsync('rename')
 
