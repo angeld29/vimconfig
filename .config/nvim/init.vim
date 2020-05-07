@@ -77,6 +77,12 @@ set helplang=ru,en
 set tags=./tags,tags,../tags
 
 
+set lazyredraw "Не перерисовывать экран посреди макроса (для повышения производительности).
+set smartcase " поиск с заглавными буквами чувствителен к регистру
+set ignorecase
+
+set inccommand=nosplit "показывает в реальном времени, какие изменения внесёт команда
+
 set tabstop=4
 set shiftwidth=4
 set autoindent
@@ -95,12 +101,11 @@ set linebreak
 set hlsearch
 set incsearch
 set wrapscan
-set ignorecase
-
 
 set nobackup
 set nowritebackup
 set noswapfile
+set undofile "Сохранение действий, даже если вы закрываете и открываете Vim
 
 set visualbell
 
@@ -108,6 +113,7 @@ set path=.,,**
 
 set diffopt+=vertical
 
+set foldcolumn=2
 setlocal foldmethod=syntax
 set foldnestmax=5
 setlocal foldlevelstart=1
