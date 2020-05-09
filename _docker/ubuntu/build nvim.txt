@@ -25,3 +25,19 @@ easy_install-3.4 pip
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+
+
+
+
+
+sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+RUN cd ~ && git clone https://github.com/neovim/neovim.git  && cd ~/neovim && make CMAKE_BUILD_TYPE=Release &&  make install && cd .. && rm -r ~/neovim
+
+apt-get install silversearcher-ag
+apt-get install python-dev python-pip python3-dev python3-pip -y
+pip3 install --user neovim
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/utils/fzf
+~/utils/fzf/install --all
+git clone https://github.com/angeld29/vimconfig.git && cd vimconfig && ./deploy
+nvim -c 'PlugInstall' -c 'qa!' 
+nvim -c 'UpdateRemotePlugins' -c 'qa!' 

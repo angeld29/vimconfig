@@ -7,20 +7,25 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
+"Plug 'roxma/vim-hug-neovim-rpc'
+"Plug 'roxma/nvim-yarp'
 
 Plug 'christoomey/vim-tmux-navigator'
 "Produce increasing/decreasing columns of numbers, dates, or daynames
 ":I :II :IO :IX
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'vim-scripts/VisIncr'
 
+Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'Konfekt/FastFold'
 "Plug 'vim-scripts/AutoComplPop'
 Plug 'vim-scripts/taglist.vim'
@@ -69,13 +74,19 @@ set fileencodings=utf8,cp1251
 set ffs=unix,dos
 set fileformat=unix
 set cursorline
-
+set wildmode=list:lastused,full
 set termencoding=utf8
 set langmenu=ru_ru 
 set helplang=ru,en 
 
 set tags=./tags,tags,../tags
 
+
+set lazyredraw "Не перерисовывать экран посреди макроса (для повышения производительности).
+set smartcase " поиск с заглавными буквами чувствителен к регистру
+set ignorecase
+
+set inccommand=nosplit "показывает в реальном времени, какие изменения внесёт команда
 
 set tabstop=4
 set shiftwidth=4
@@ -87,7 +98,11 @@ syntax on
 
 set showcmd
 set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%{fugitive#statusline()}%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
-set laststatus=2
+if exists('g:started_by_firenvim')
+    set laststatus=0
+else
+    set laststatus=2
+endif
 
 set wrap
 set linebreak
@@ -95,12 +110,11 @@ set linebreak
 set hlsearch
 set incsearch
 set wrapscan
-set ignorecase
-
 
 set nobackup
 set nowritebackup
 set noswapfile
+set undofile "Сохранение действий, даже если вы закрываете и открываете Vim
 
 set visualbell
 
@@ -108,6 +122,7 @@ set path=.,,**
 
 set diffopt+=vertical
 
+set foldcolumn=2
 setlocal foldmethod=syntax
 set foldnestmax=5
 setlocal foldlevelstart=1
@@ -191,8 +206,10 @@ let g:ale_type_map = {
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " " This is off by default.
-let g:ale_perl_perl_options = '-c -Mwarnings -Ilib -I/home/sites/CPB/lib '
-let g:ale_perl_perl_executable = 'docker exec -it kino-back  perl'
+"let g:ale_perl_perl_options = ' -c -Mwarnings -Ilib -I/home/sites/CPB/lib '
+let g:ale_perl_perl_options = ' -c -Mwarnings -Ilib -I/home/centos/CPB/lib '
+"let g:ale_perl_perl_executable = 'docker exec -it kino-back  perl'
+"let g:ale_perl_perl_executable = 'perl'
 let g:ale_perl_perlcritic_showrules = 1
 "let g:ale_fix_on_save = 1
 let g:ale_sign_error = '>>'
@@ -218,7 +235,7 @@ set completeopt=longest,menuone,preview ",popuphidden
 "" " documentation.
 ""set completepopup=highlight:Pmenu,border:off
 set previewheight=5
-let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax']"
+let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax', 'coc-db']"
 
 "====================== COC ============================================
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -239,6 +256,12 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
@@ -268,7 +291,7 @@ function! s:show_documentation()
   endif
 endfunction
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 "nmap <leader>rn <Plug>(coc-rename)
@@ -283,4 +306,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 "nmap gc <Plug>(coc-git-commit)
 
 command! -nargs=0 CocRename :call CocActionAsync('rename')
+
+let g:db_ui_dotenv_variable_prefix = 'DB_UI_'
+let g:db_ui_winwidth = 60
 
