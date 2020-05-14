@@ -16,7 +16,9 @@ make_afisha() {
     git push origin tag $1.$2
     bin/dev/rpmbuild.sh afisha $1 $2
 }
+tic -x -o ~/.terminfo ~/.term-24bit.terminfo
 export TERM=xterm-256color
+export TERM=xterm-24bit
 PS1="\[\e[0;32m\][\u@\h \W](\$(git branch 2>/dev/null | grep '*' | sed -e 's/\* //'))\\$\[\e[0m\] "
 if [ -t 0 ]; then   # only run if stdin is a terminal
     stty -ixon

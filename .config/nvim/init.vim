@@ -6,6 +6,17 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
+Plug 'rafi/awesome-vim-colorschemes'
+"Plug 'flazz/vim-colorschemes'
+
+Plug 'godlygeek/tabular'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'yggdroot/indentline'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
 
 "Plug 'roxma/vim-hug-neovim-rpc'
 "Plug 'roxma/nvim-yarp'
@@ -40,10 +51,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "== Perl
 "Plug 'c9s/perlomni.vim'
 "Plug 'vim-scripts/perl-support.vim'
-"Plug 'vim-perl/vim-perl'
+Plug 'vim-perl/vim-perl'
 
 "Plug 'OrangeT/vim-csharp'
 "Plug 'OmniSharp/omnisharp-vim'
+
+"Plugin 'fatih/vim-go'
+
 
 call plug#end()
 set nocompatible
@@ -63,12 +77,21 @@ set mousehide                         " Hide the mouse when typing text
 set iminsert=0                  " раскладка по умолчанию для ввода - английская
 set imsearch=0                  " раскладка по умолчанию для поиска - английская
 
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 set background=dark
 "silent! colorscheme solarized
-"silent! colorscheme NeoSolarized
-silent! colorscheme gruvbox
-"set termguicolors
+silent! colorscheme NeoSolarized
+"silent! colorscheme gruvbox
+"silent! colorscheme afterglow
+"silent! colorscheme flattened_dark
+"
+"silent! colorscheme materialbox
+"silent! colorscheme onedark
+"silent! colorscheme stellarized
+"silent! colorscheme OceanicNext
+"silent! colorscheme deus
+
+set termguicolors
 
 set fileencodings=utf8,cp1251
 set ffs=unix,dos
@@ -235,7 +258,7 @@ set completeopt=longest,menuone,preview ",popuphidden
 "" " documentation.
 ""set completepopup=highlight:Pmenu,border:off
 set previewheight=5
-let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax', 'coc-db']"
+let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax', 'coc-db', 'coc-git']"
 
 "====================== COC ============================================
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -305,8 +328,74 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " show commit contains current position
 "nmap gc <Plug>(coc-git-commit)
 
+nmap <silent> gs <Plug>(coc-git-chunkinfo)
+nmap <silent> g{ <Plug>(coc-git-prevchunk)
+nmap <silent> g} <Plug>(coc-git-nextchunk)
+
 command! -nargs=0 CocRename :call CocActionAsync('rename')
 
 let g:db_ui_dotenv_variable_prefix = 'DB_UI_'
 let g:db_ui_winwidth = 60
 
+let s:cycle_colors_schemes = "\n".globpath(&rtp, "colors/*.vim")."\n"
+let s:cycle_colors_currentfile = ""
+let s:cycle_colors_currentname = ""
+
+function! s:CycleColor(direction)
+	if exists("g:colors_name") && g:colors_name != s:cycle_colors_currentname
+		" The user must have selected a colorscheme manually; try
+		" to find it and choose the next one after it
+		let nextfile = substitute(s:cycle_colors_schemes, '.*\n\([^\x0A]*[/\\]'.g:colors_name.'\.vim\)\n.*', '\1', '')
+		if nextfile == s:cycle_colors_schemes
+			let s:cycle_colors_currentfile = ""
+		else
+			let s:cycle_colors_currentfile = nextfile
+		endif
+	endif
+
+	if a:direction >= 0
+		" Find the current file name, and select the next one.
+		" No substitution will take place if the current file is not
+		"   found or is the last in the list.
+		let nextfile = substitute(s:cycle_colors_schemes, '.*\n'.s:cycle_colors_currentfile.'\n\([^\x0A]\+\)\n.*', '\1', '')
+		" If the above worked, there will be no control chars in
+		"   nextfile, so this will not substitute; otherwise, this will
+		"   choose the first file in the list.
+		let nextfile = substitute(nextfile, '\n\+\([^\x0A]\+\)\n.*', '\1', '')
+	else
+		let nextfile = substitute(s:cycle_colors_schemes, '.*\n\([^\x0A]\+\)\n'.s:cycle_colors_currentfile.'\n.*', '\1', '')
+		let nextfile = substitute(nextfile, '.*\n\([^\x0A]\+\)\n\+', '\1', '')
+	endif
+
+	if nextfile != s:cycle_colors_schemes
+		let clrschm = substitute(nextfile, '^.*[/\\]\([^/\\]\+\)\.vim$', '\1', '')
+		" In case the color scheme does not set this variable, empty it so we can tell.
+		unlet! g:colors_name
+		exec 'colorscheme '.clrschm
+		redraw
+		if exists("g:colors_name")
+			let s:cycle_colors_currentname = g:colors_name
+			if clrschm != g:colors_name
+				" Let user know colorscheme did not set g:colors_name properly
+				echomsg 'colorscheme' clrschm 'set g:colors_name to' g:colors_name
+			endif
+		else
+			let s:cycle_colors_currentname = ""
+			echomsg 'colorscheme' clrschm 'did not set g:colors_name'
+		endif
+		echo s:cycle_colors_currentname.' ('.nextfile.')'
+	endif
+
+	let s:cycle_colors_currentfile = nextfile
+
+endfunction
+
+function! s:CycleColorRefresh()
+	let s:cycle_colors_schemes = "\n".globpath(&rtp, "colors/*.vim")."\n"
+endfunction
+command! CycleColorNext :call s:CycleColor(1)
+command! CycleColorPrev :call s:CycleColor(-1)
+command! CycleColorRefresh :call s:CycleColorRefresh()
+
+"nnoremap <f4> :CycleColorNext<cr>
+"nnoremap <f3> :CycleColorPrev<cr>
