@@ -8,6 +8,7 @@ Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 Plug 'rafi/awesome-vim-colorschemes'
 "Plug 'flazz/vim-colorschemes'
+"Plug 'yuchao86/Learn-Vimscript-the-Hard-Way'
 
 Plug 'godlygeek/tabular'
 "Plug 'easymotion/vim-easymotion'
@@ -32,6 +33,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
+Plug 'mileszs/ack.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -67,6 +69,7 @@ filetype plugin indent on
 let g:python3_host_prog='g:\prog\Python36-32\python.exe'
 "runtime macros/matchit.vim "не требуется для загрузки
 set keymap=russian-dvorakpr
+"set langmap=укенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЧСМИТЬБЮЁЯ;.pyfgcrl/@aoeuidhtns-'qjkxbmwvz:<>PYFGCRL?^AOEUIDHTNS_QJKXBMWVZ\"
 "set guifont=Lucida\ Console:h10:cRUSSIAN
 set iskeyword=@,48-57,_,192-255
 
@@ -127,12 +130,13 @@ else
     set laststatus=2
 endif
 
-set wrap
 set linebreak
 
 set hlsearch
 set incsearch
 set wrapscan
+set wrap
+set hidden
 
 set nobackup
 set nowritebackup
@@ -198,6 +202,7 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 "====================
+let g:ackprg = "rg --vimgrep"
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 " [[B]Commits] Customize the options used by 'git log':
@@ -229,10 +234,13 @@ let g:ale_type_map = {
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " " This is off by default.
-"let g:ale_perl_perl_options = ' -c -Mwarnings -Ilib -I/home/sites/CPB/lib '
-let g:ale_perl_perl_options = ' -c -Mwarnings -Ilib -I/home/centos/CPB/lib '
+"let g:ale_perl_perl_options = ' exec -it kino-back perl -c -Mwarnings -Ilib -I/home/sites/CPB/lib '
+let g:ale_perl_perl_options = ' '
+"let g:ale_perl_perl_options = ' -c -Mwarnings -Ilib -I/home/centos/CPB/lib '
 "let g:ale_perl_perl_executable = 'docker exec -it kino-back  perl'
 "let g:ale_perl_perl_executable = 'perl'
+let g:ale_perl_perl_executable = 'ppp.sh'
+"let g:ale_perl_perl_executable = 'docker'
 let g:ale_perl_perlcritic_showrules = 1
 "let g:ale_fix_on_save = 1
 let g:ale_sign_error = '>>'
