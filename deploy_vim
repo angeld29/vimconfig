@@ -9,3 +9,4 @@ cp -R .config/nvim/keymap ~/.vim/
 
 cat .bashrc  >> ~/.bashrc
 
+cp .term-24bit.terminfo ~/

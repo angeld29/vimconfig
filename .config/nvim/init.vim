@@ -6,21 +6,37 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized'
 Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
+Plug 'rafi/awesome-vim-colorschemes'
+"Plug 'flazz/vim-colorschemes'
 
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
+Plug 'godlygeek/tabular'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'yggdroot/indentline'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
+
+"Plug 'roxma/vim-hug-neovim-rpc'
+"Plug 'roxma/nvim-yarp'
 
 Plug 'christoomey/vim-tmux-navigator'
 "Produce increasing/decreasing columns of numbers, dates, or daynames
 ":I :II :IO :IX
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'vim-scripts/VisIncr'
 
+Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'Konfekt/FastFold'
 "Plug 'vim-scripts/AutoComplPop'
 Plug 'vim-scripts/taglist.vim'
@@ -35,10 +51,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "== Perl
 "Plug 'c9s/perlomni.vim'
 "Plug 'vim-scripts/perl-support.vim'
-"Plug 'vim-perl/vim-perl'
+Plug 'vim-perl/vim-perl'
 
 "Plug 'OrangeT/vim-csharp'
 "Plug 'OmniSharp/omnisharp-vim'
+
+"Plugin 'fatih/vim-go'
+
 
 call plug#end()
 set nocompatible
@@ -58,18 +77,27 @@ set mousehide                         " Hide the mouse when typing text
 set iminsert=0                  " раскладка по умолчанию для ввода - английская
 set imsearch=0                  " раскладка по умолчанию для поиска - английская
 
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 set background=dark
 "silent! colorscheme solarized
-"silent! colorscheme NeoSolarized
-silent! colorscheme gruvbox
-"set termguicolors
+silent! colorscheme NeoSolarized
+"silent! colorscheme gruvbox
+"silent! colorscheme afterglow
+"silent! colorscheme flattened_dark
+"
+"silent! colorscheme materialbox
+"silent! colorscheme onedark
+"silent! colorscheme stellarized
+"silent! colorscheme OceanicNext
+"silent! colorscheme deus
+
+set termguicolors
 
 set fileencodings=utf8,cp1251
 set ffs=unix,dos
 set fileformat=unix
 set cursorline
-
+set wildmode=list:lastused,full
 set termencoding=utf8
 set langmenu=ru_ru 
 set helplang=ru,en 
@@ -93,7 +121,11 @@ syntax on
 
 set showcmd
 set statusline=%<%h%m%r\ L:%l/%L[%P]\ C:%c%V\ %m%{fugitive#statusline()}%f\ \|%{v:register}\ %=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B
-set laststatus=2
+if exists('g:started_by_firenvim')
+    set laststatus=0
+else
+    set laststatus=2
+endif
 
 set wrap
 set linebreak
@@ -197,8 +229,10 @@ let g:ale_type_map = {
 
 " Set this setting in vimrc if you want to fix files automatically on save.
 " " This is off by default.
-let g:ale_perl_perl_options = '-c -Mwarnings -Ilib -I/home/sites/CPB/lib '
-let g:ale_perl_perl_executable = 'docker exec -it kino-back  perl'
+"let g:ale_perl_perl_options = ' -c -Mwarnings -Ilib -I/home/sites/CPB/lib '
+let g:ale_perl_perl_options = ' -c -Mwarnings -Ilib -I/home/centos/CPB/lib '
+"let g:ale_perl_perl_executable = 'docker exec -it kino-back  perl'
+"let g:ale_perl_perl_executable = 'perl'
 let g:ale_perl_perlcritic_showrules = 1
 "let g:ale_fix_on_save = 1
 let g:ale_sign_error = '>>'
@@ -224,7 +258,7 @@ set completeopt=longest,menuone,preview ",popuphidden
 "" " documentation.
 ""set completepopup=highlight:Pmenu,border:off
 set previewheight=5
-let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax']"
+let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax', 'coc-db', 'coc-git']"
 
 "====================== COC ============================================
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -245,6 +279,12 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
@@ -274,7 +314,7 @@ function! s:show_documentation()
   endif
 endfunction
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 "nmap <leader>rn <Plug>(coc-rename)
@@ -288,5 +328,74 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " show commit contains current position
 "nmap gc <Plug>(coc-git-commit)
 
+nmap <silent> gs <Plug>(coc-git-chunkinfo)
+nmap <silent> g{ <Plug>(coc-git-prevchunk)
+nmap <silent> g} <Plug>(coc-git-nextchunk)
+
 command! -nargs=0 CocRename :call CocActionAsync('rename')
 
+let g:db_ui_dotenv_variable_prefix = 'DB_UI_'
+let g:db_ui_winwidth = 60
+
+let s:cycle_colors_schemes = "\n".globpath(&rtp, "colors/*.vim")."\n"
+let s:cycle_colors_currentfile = ""
+let s:cycle_colors_currentname = ""
+
+function! s:CycleColor(direction)
+	if exists("g:colors_name") && g:colors_name != s:cycle_colors_currentname
+		" The user must have selected a colorscheme manually; try
+		" to find it and choose the next one after it
+		let nextfile = substitute(s:cycle_colors_schemes, '.*\n\([^\x0A]*[/\\]'.g:colors_name.'\.vim\)\n.*', '\1', '')
+		if nextfile == s:cycle_colors_schemes
+			let s:cycle_colors_currentfile = ""
+		else
+			let s:cycle_colors_currentfile = nextfile
+		endif
+	endif
+
+	if a:direction >= 0
+		" Find the current file name, and select the next one.
+		" No substitution will take place if the current file is not
+		"   found or is the last in the list.
+		let nextfile = substitute(s:cycle_colors_schemes, '.*\n'.s:cycle_colors_currentfile.'\n\([^\x0A]\+\)\n.*', '\1', '')
+		" If the above worked, there will be no control chars in
+		"   nextfile, so this will not substitute; otherwise, this will
+		"   choose the first file in the list.
+		let nextfile = substitute(nextfile, '\n\+\([^\x0A]\+\)\n.*', '\1', '')
+	else
+		let nextfile = substitute(s:cycle_colors_schemes, '.*\n\([^\x0A]\+\)\n'.s:cycle_colors_currentfile.'\n.*', '\1', '')
+		let nextfile = substitute(nextfile, '.*\n\([^\x0A]\+\)\n\+', '\1', '')
+	endif
+
+	if nextfile != s:cycle_colors_schemes
+		let clrschm = substitute(nextfile, '^.*[/\\]\([^/\\]\+\)\.vim$', '\1', '')
+		" In case the color scheme does not set this variable, empty it so we can tell.
+		unlet! g:colors_name
+		exec 'colorscheme '.clrschm
+		redraw
+		if exists("g:colors_name")
+			let s:cycle_colors_currentname = g:colors_name
+			if clrschm != g:colors_name
+				" Let user know colorscheme did not set g:colors_name properly
+				echomsg 'colorscheme' clrschm 'set g:colors_name to' g:colors_name
+			endif
+		else
+			let s:cycle_colors_currentname = ""
+			echomsg 'colorscheme' clrschm 'did not set g:colors_name'
+		endif
+		echo s:cycle_colors_currentname.' ('.nextfile.')'
+	endif
+
+	let s:cycle_colors_currentfile = nextfile
+
+endfunction
+
+function! s:CycleColorRefresh()
+	let s:cycle_colors_schemes = "\n".globpath(&rtp, "colors/*.vim")."\n"
+endfunction
+command! CycleColorNext :call s:CycleColor(1)
+command! CycleColorPrev :call s:CycleColor(-1)
+command! CycleColorRefresh :call s:CycleColorRefresh()
+
+"nnoremap <f4> :CycleColorNext<cr>
+"nnoremap <f3> :CycleColorPrev<cr>
