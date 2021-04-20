@@ -8,7 +8,7 @@ Plug 'morhetz/gruvbox'
 Plug 'tomasr/molokai'
 Plug 'rafi/awesome-vim-colorschemes'
 "Plug 'flazz/vim-colorschemes'
-"Plug 'yuchao86/Learn-Vimscript-the-Hard-Way'
+Plug 'yuchao86/Learn-Vimscript-the-Hard-Way'
 
 Plug 'godlygeek/tabular'
 "Plug 'easymotion/vim-easymotion'
@@ -58,7 +58,7 @@ Plug 'vim-perl/vim-perl'
 "Plug 'OrangeT/vim-csharp'
 "Plug 'OmniSharp/omnisharp-vim'
 
-"Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 
 call plug#end()
@@ -66,7 +66,9 @@ set nocompatible
 filetype off
 filetype plugin indent on
 
-let g:python3_host_prog='g:\prog\Python36-32\python.exe'
+"let g:python3_host_prog='g:\prog\Python36-32\python.exe'
+let g:python3_host_prog='/home/sites/pypo_venv/bin/python'
+
 "runtime macros/matchit.vim "не требуется для загрузки
 set keymap=russian-dvorakpr
 "set langmap=укенгшщзхъфывапролджэячсмитьбюёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЧСМИТЬБЮЁЯ;.pyfgcrl/@aoeuidhtns-'qjkxbmwvz:<>PYFGCRL?^AOEUIDHTNS_QJKXBMWVZ\"
@@ -266,7 +268,7 @@ set completeopt=longest,menuone,preview ",popuphidden
 "" " documentation.
 ""set completepopup=highlight:Pmenu,border:off
 set previewheight=5
-let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax', 'coc-db', 'coc-git']"
+let g:coc_global_extensions=[ 'coc-omnisharp', 'coc-html', 'coc-json', 'coc-css', 'coc-yaml', 'coc-syntax', 'coc-db', 'coc-git', 'coc-python']"
 
 "====================== COC ============================================
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
