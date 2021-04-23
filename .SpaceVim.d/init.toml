@@ -1,0 +1,90 @@
+#=============================================================================
+# dark_powered.toml --- dark powered configuration example for SpaceVim
+# Copyright (c) 2016-2020 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg at 163.com >
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+    # set spacevim theme. by default colorscheme layer is not loaded,
+    # if you want to use more colorscheme, please load the colorscheme
+    # layer
+    colorscheme = "NeoSolarized"
+    colorscheme_bg = "dark"
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = true
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "nil"
+    statusline_unicode_symbols = false
+    statusline_iseparator = "bar"
+    buffer_index_type = 4
+    windows_index_type = 3
+    enable_tabline_filetype_icon = false
+    enable_statusline_mode = false
+    expand_tab = true
+    default_indent = 4
+    enable_statusline_bfpath = true
+    project_rooter_patterns = ['.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
+    escape_key_binding = '<C-_>'
+    indentLine_char = '¦'
+    bootstrap_before = 'myspacevim#before'
+    windows_leader = ''
+    windows_smartclose = ''
+    
+#[[custom_plugins]]
+#name =  'junegunn/fzf'
+#merged = 0
+[[custom_plugins]]
+name =  'junegunn/fzf.vim'
+merged = 0
+
+# Enable autocomplete layer
+[[layers]]
+name = 'autocomplete'
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "smart"
+
+[[layers]]
+name = 'shell'
+default_position = 'top'
+default_height = 30
+
+[[layers]]
+name = 'fzf'
+
+[[layers]]
+name = "incsearch"
+
+[[layers]]
+name = 'tools'
+
+[[layers]]
+name = 'lang#perl'
+
+[[layers]]
+name = 'lang#python'
+python_interpreter = '/home/sites/pypo_venv/bin/python'
+enabled_linters = ['python', 'pylint']
+
+[[layers]]
+name = 'git'
+git_plugin = 'fugitive'
+
+[[layers]]
+name = 'tmux'
+
+[[layers]]
+name = "lsp"
+filetypes = [
+  "python",
+]
+
+[[layers]]
+  name = "colorscheme"
+
+[[layers]]
+name = "lang#html"
